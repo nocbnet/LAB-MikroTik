@@ -16,6 +16,9 @@ Pada RouterOS v7.5 memperkenalkan fitur netwatch yang jauh lebih gila, karena di
 | **down-script** | Script yang akan dijalankan ketika status Down                                                                                                                                                                                                                                        |
 | **test-script** | Script yang akan dijalankan dalam situasi sesudah Up atau Down                                                                                                                                                                                                                        |
 
+### Penjelasan Opsi Probe
+#### ICMP 
+
 # Sumber Referensi
 - https://www.youtube.com/watch?v=qK0aUo4B5Tc
 - https://help.mikrotik.com/docs/display/ROS/Netwatch
