@@ -30,6 +30,12 @@ Pada RouterOS v7.5 memperkenalkan fitur netwatch yang jauh lebih gila, karena di
 | **thr-loss-percent** | Batasan packet loss dalam percent                               |
 | **thr-loss-count**   | Batasan jumlah packet loss                                      |
 
+### TCP-CONN
+|       Parameter       | Deksripsi                   |
+|:---------------------:|-----------------------------|
+| **port**              | Port TCP untuk dikoneksikan |
+| **thr-tcp-conn-time** | Batas waktu koneksi TCP     |
+
 # Sumber Referensi
 - https://www.youtube.com/watch?v=qK0aUo4B5Tc
 - https://help.mikrotik.com/docs/display/ROS/Netwatch
