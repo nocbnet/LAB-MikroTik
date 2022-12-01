@@ -1,3 +1,23 @@
+- [Pembahasan](#pembahasan)
+  * [Parameter](#parameter)
+    + [Penjelasan Opsi Probe](#penjelasan-opsi-probe)
+      - [ICMP](#icmp)
+    + [TCP-CONN](#tcp-conn)
+    + [HTTP-GET](#http-get)
+    + [Contoh Implementasi](#contoh-implementasi)
+      - [Monitoring Web BNET](#monitoring-web-bnet)
+      - [Monitoring Rhome](#monitoring-rhome)
+      - [Monitoring Rhome Primitf](#monitoring-rhome-primitf)
+      - [Cek Port SSH Rhome](#cek-port-ssh-rhome)
+    + [Rekomendasi Implementasi](#rekomendasi-implementasi)
+    + [Temuan Bug](#temuan-bug)
+    + [HTTP-GET](#http-get-1)
+    + [Kekurangan](#kekurangan)
+- [Sumber Referensi](#sumber-referensi)
+
+<!--<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>-->
+
+
 # Pembahasan
 Fitur netwatch berfungsi untuk memonitor kondisi host apakah up atau down. Netwatch biasa diimplementasikan untuk memonitoring sebuah host yang memang sangat penting dan harus dimonitoring selama 24 Jam. Netwatch bekerja dengan cara mengirimkan packet ICMP ke host dan jika packet ICMP tersebut mendapatkan respon timeout, maka status host tersebut adalah down. 
 <br>
@@ -58,7 +78,7 @@ add comment="MONITORING RHOME" disabled=no down-script=":log info \"Rhome Berjal
 ```
 Netwatch akan mengecekan rhome dengan aturan packet yang dikirim dan diterima harus 20 dan batas maksimal packet los hanya 1% dan batas latency tertinggi ialah 10ms. Jika sudah melanggar dari aturan tersebut, makan dikatakan Rhome sedang tidak normal atau down.
 
-#### Monitoring Rhome Primitf
+#### Monitoring Rhome Primitif
 ```rsc
 /tool netwatch
 add comment="PRIMITIF MONITORING RHOME" disabled=no down-script=":log info \"Rhome Down\"" host=103.73.72.222 http-codes="" interval=10s test-script="" type=simple up-script=":log info \"Rhome Up\""
@@ -75,6 +95,17 @@ Netwatch akan mengecekan apakah port SSH Rhome berada di port 22322 atau bukan. 
 ### Rekomendasi Implementasi
 1. Dapat diimplementasikan pada host yang memiliki 2 Link (Main & Backup). Jika pada link main statusnya sudah tidak normal (bukan hanya down), maka langsung dipindahkan ke link backup dengan cara membuat perintah semacam failover. Dengan cara ini akan lebih efektif dibandingkan dengan netwatch versi sebelumnya yang cukup lama dalam melakukan pergantian Link.
 2. Dapat diimplementasikan untuk pengecekan Port SSH jika ada yang melakukan perubahan dengan menggunakan type **tcp-conn**.
+
+### Temuan Bug
+### HTTP-GET
+1. Kesalahan Status Code
+
+![image](https://user-images.githubusercontent.com/67460437/205040000-c176b190-89b7-466c-9df5-c14b34d87701.png)
+
+Setelah dilakukan implementasi, terdapat bug yaitu tidak sesuainya response code ketika menggunakan type HTTP-GET. Jadi belum bisa diimplementasikan jika ingin mengecek Website berjalan normal atau tidak.
+
+### Kekurangan
+1. HTTP-GET tidak bisa digunakan untuk mengecek website yang berada dibawah NAT. Dalam artian semisal kita mau cek web bnet.id, itu tidak akan bisa jika memasukan nama domainnya, melainkan harus IP Address dari website tersebut.
 
 # Sumber Referensi
 - https://www.youtube.com/watch?v=qK0aUo4B5Tc
