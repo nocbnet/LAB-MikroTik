@@ -33,8 +33,15 @@ Pada RouterOS v7.5 memperkenalkan fitur netwatch yang jauh lebih gila, karena di
 ### TCP-CONN
 |       Parameter       | Deksripsi                   |
 |:---------------------:|-----------------------------|
-| **port**              | Port TCP untuk dikoneksikan |
+| **port**              | Port TCP host               |
 | **thr-tcp-conn-time** | Batas waktu koneksi TCP     |
+
+### HTTP-GET
+|     Parameter     | Deksripsi                                                 |
+|:-----------------:|-----------------------------------------------------------|
+| **thr-http-time** | Batas waktu response (default 10 detik)                   |
+| **http-code-min** | Respon kode HTTP (default 100)                            |
+| **http-code-max** | Respon kode dalam rentang [http-code-min, http-code-max]  |
 
 # Sumber Referensi
 - https://www.youtube.com/watch?v=qK0aUo4B5Tc
