@@ -43,6 +43,22 @@ Pada RouterOS v7.5 memperkenalkan fitur netwatch yang jauh lebih gila, karena di
 | **http-code-min** | Respon kode HTTP (default 100)                            |
 | **http-code-max** | Respon kode dalam rentang [http-code-min, http-code-max]  |
 
+### Contoh Implementasi
+#### Monitoring Web BNET
+```rsc
+/tool netwatch
+add comment="MONITOR WEB BNET" disabled=no down-script=":log info \"Web BNET Down\"" host=103.73.73.177 http-codes=100-499 interval=10s port=443 test-script=":log info \"Pengecekan Web Selesai\"" type=http-get up-script=":log info \"Web BNET Up\""
+```
+Netwatch akan mengecekan apakah Web BNET sedang berjalan normal atau tidak dengan range response code 100-499. Jika response lebih dari 499, maka disimpulkan bahwa web BNET sedang down.
+
+### Monitoring Rhome
+```rsc
+/tool netwatch
+add comment="MONITORING RHOME" disabled=no down-script=":log info \"Rhome Berjalan Tidak Normal\"" host=103.73.72.222 http-codes="" interval=10s packet-count=20 test-script=":log info \"Pengecekan Rhome Selesai\"" thr-loss-percent=1% thr-max=10ms type=icmp up-script=":log info \"Rhome Berjalan Normal\""
+```
+Netwatch akan mengecekan rhome dengan aturan packet yang dikirim dan diterima harus 20 dan batas maksimal packet los hanya 1% dan batas latency tertinggi ialah 10ms. Jika sudah melanggar dari aturan tersebut, makan dikatakan Rhome sedang down atau tidak normal.
+
+
 # Sumber Referensi
 - https://www.youtube.com/watch?v=qK0aUo4B5Tc
 - https://help.mikrotik.com/docs/display/ROS/Netwatch
