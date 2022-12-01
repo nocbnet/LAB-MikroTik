@@ -18,6 +18,17 @@ Pada RouterOS v7.5 memperkenalkan fitur netwatch yang jauh lebih gila, karena di
 
 ### Penjelasan Opsi Probe
 #### ICMP 
+|       Parameter      | Deksripsi                                                       |
+|:--------------------:|-----------------------------------------------------------------|
+| **packet-interval**  | Rentang waktu packet ICMP yang dikirimkan                       |
+| **packet-count**     | Jumlah packet yang dikirimkan dalam satu pengujian (default 10) |
+| **packet-size**      | Ukuran total packet IP ICMP                                     |
+| **thr-rtt-max**      | Batasan maksimal latency                                        |
+| **thr-rtt-avg**      | Batasan rata-rata latency                                       |
+| **thr-rtt-stdev**    | Batasan standar deviasi latency                                 |
+| **thr-rtt-jitter**   | Batasan jitter                                                  |
+| **thr-loss-percent** | Batasan packet loss dalam percent                               |
+| **thr-loss-count**   | Batasan jumlah packet loss                                      |
 
 # Sumber Referensi
 - https://www.youtube.com/watch?v=qK0aUo4B5Tc
